@@ -9,7 +9,8 @@ const product = new Schema({
     price: {type: Object, required: true},
     category: {type: String, require: false},
     arrayImg: {type: [String], require: false},
-    buys: {type: Number, require: true}
+    buys: {type: Number, require: true},
+    created_at: {type: Date, default: Date.now()}
 })
 
 export default mongoose.model("Products", product);
