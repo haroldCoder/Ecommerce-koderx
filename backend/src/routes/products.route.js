@@ -24,3 +24,4 @@ router.route("/products/:id")
     const { id } = req.params;
     new products_controllers_1.default(req, res).deleteProduct(parseInt(id));
 });
+module.exports = router;

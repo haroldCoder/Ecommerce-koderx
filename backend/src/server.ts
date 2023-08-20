@@ -11,6 +11,8 @@ app.use(cors());
 app.use(bodyParser.json())
 
 
+app.use("/api", require("./routes/products.route"))
+
 app.listen(4500, ()=>{
     console.log(`Server on port 4500`);
     new ConnectionDB();

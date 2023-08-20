@@ -26,3 +26,5 @@ router.route("/products/:id")
 
     new ProductsControllers(req, res).deleteProduct(parseInt(id));
 })
+
+module.exports = router;
