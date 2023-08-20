@@ -1,8 +1,7 @@
 import { Request, Response } from "express";
 import ProductsModel from "../models/Products.model";
-import { Model, Schema } from "mongoose";
 
-class ProductsControllers{
+export default class ProductsControllers{
     req: Request;
     res: Response;
     productsDB: typeof ProductsModel;
