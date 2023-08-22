@@ -8,10 +8,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import { Button, FormControl, InputLabel, Select, SelectChangeEvent } from '@mui/material';
+import { Button} from '@mui/material';
 
 export default function Navbar() {
-    const [auth, setAuth] = React.useState(true);
+    const [auth] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [anchorMe, setAnchorMe] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorMe);
