@@ -1,6 +1,3 @@
-import React from 'react'
-import { Products } from '../types'
-
 interface propsCard{
     name: string,
     description: string,
