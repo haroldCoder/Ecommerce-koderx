@@ -10,6 +10,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { Button} from '@mui/material';
 import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/clerk-react';
+import { Link } from 'react-router-dom';
 
 export default function Navbar() {
     const [auth] = React.useState(true);
@@ -44,15 +45,21 @@ export default function Navbar() {
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Typography className='text-md hover:text-blue-300 cursor-pointer w-auto'>
-                            Home
-                        </Typography>
-                        <Typography className='text-md hover:text-blue-300 cursor-pointer w-auto'>
-                            Featured
-                        </Typography>
-                        <Typography className='text-md hover:text-blue-300 cursor-pointer w-auto'>
-                            Shopping cart
-                        </Typography>
+                        <Link to="/">
+                            <Typography className='text-md hover:text-blue-300 cursor-pointer w-auto'>
+                                Home
+                            </Typography>
+                        </Link>
+                        <Link to="publish">
+                            <Typography className='text-md hover:text-blue-300 cursor-pointer w-auto'>
+                                Publish
+                            </Typography>
+                        </Link>
+                        <Link to="carshop">
+                            <Typography className='text-md hover:text-blue-300 cursor-pointer w-auto'>
+                                Shopping cart
+                            </Typography>
+                        </Link>
                         <div>
                             <Button
                                 id="basic-button"

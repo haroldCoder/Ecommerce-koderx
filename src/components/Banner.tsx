@@ -48,7 +48,7 @@ export default function Banner() {
         data.length > 0 ?
           <>
             <section className="w-[80%] flex flex-col items-center animate-ease-in">
-              <h2 style={{fontFamily: "'Francois One', sans-serif"}} className="text-4xl bg-clip-text text-transparent bg-gradient-to-tr to-blue-400 via-blue-300 font-bold from-gray-900 mb-6">{data[index.current].name}</h2>
+              <h2 style={{fontFamily: "'Francois One', sans-serif"}} className="text-4xl bg-clip-text text-transparent bg-gradient-to-tr to-blue-500 via-blue-400 font-bold from-gray-900 mb-6">{data[index.current].name}</h2>
               <div className="px-4 py-2 bg-gray-900 opacity-50 text-white text-3xl from-white">
                 <h4 className="text-center">{data[index.current].price} $</h4>
               </div>
