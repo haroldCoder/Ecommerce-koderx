@@ -9,6 +9,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { Button} from '@mui/material';
+import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/clerk-react';
 
 export default function Navbar() {
     const [auth] = React.useState(true);
@@ -78,38 +79,12 @@ export default function Navbar() {
                         </div>
                     </div>
                     
-                    {auth && (
-                        <div>
-                            <IconButton
-                                size="large"
-                                aria-label="account of current user"
-                                aria-controls="menu-appbar"
-                                aria-haspopup="true"
-                                onClick={handleMenu}
-                                color="inherit"
-                            >
-                                <AccountCircle />
-                            </IconButton>
-                            <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorEl}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                open={Boolean(anchorEl)}
-                                onClose={handleClose}
-                            >
-                                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                <MenuItem onClick={handleClose}>My account</MenuItem>
-                            </Menu>
-                        </div>
-                    )}
+                    <SignedIn>
+                        <UserButton afterSignOutUrl={window.location.href} />
+                    </SignedIn>
+                    <SignedOut>
+                        <SignInButton mode='modal' />
+                    </SignedOut>
                 </Toolbar>
             </AppBar>
         </Box>
