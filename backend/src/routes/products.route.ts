@@ -14,6 +14,13 @@ router.route("/products")
 })
 
 router.route("/products/:id")
+
+.get((req: Request, res: Response)=>{
+    const {id} = req.params;
+
+    new ProductsControllers(req, res).getProductByID(id);
+})
+
 .patch((req: Request, res: Response)=>{
     const {id} = req.params;
     const {name, description, imgURI, author, price, category, arrayImg, buys} = req.body;

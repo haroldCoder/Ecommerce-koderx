@@ -16,6 +16,10 @@ export default class ProductsControllers{
         this.res.json(await this.productsDB.find())
     }
 
+    getProductByID = async(id: string) =>{
+        this.res.json(await this.productsDB.findById(id))
+    }
+
     createProduct = async(name: string, description: string, imgURI: string, author: string, price: number, category: string, arrayImg: Array<string>, buys: number) =>{
         const newProduct = new this.productsDB({
             name: name,

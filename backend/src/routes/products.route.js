@@ -15,6 +15,10 @@ router.route("/products")
     new products_controllers_1.default(req, res).createProduct(name, description, imgURI, author, price, category, arrayImg, buys);
 });
 router.route("/products/:id")
+    .get((req, res) => {
+    const { id } = req.params;
+    new products_controllers_1.default(req, res).getProductByID(id);
+})
     .patch((req, res) => {
     const { id } = req.params;
     const { name, description, imgURI, author, price, category, arrayImg, buys } = req.body;
