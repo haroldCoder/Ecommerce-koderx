@@ -27,7 +27,7 @@ export default function Home() {
   return (
     <div>
       <Banner />
-      <section className='flex justify-between'>
+      <section className='flex flex-wrap justify-between'>
         {
           data.sort((a: Products, b: Products)=>{return b.created_at.getTime() - a.created_at.getTime()}).map((dt: Products)=>(
             <CardProducts name={dt.name} description={dt.description} imgURI={dt.imgURI} price={dt.price} />
