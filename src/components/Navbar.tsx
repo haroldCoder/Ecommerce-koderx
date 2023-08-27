@@ -5,7 +5,6 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import { Button} from '@mui/material';
@@ -13,8 +12,6 @@ import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/clerk-reac
 import { Link } from 'react-router-dom';
 
 export default function Navbar() {
-    const [auth] = React.useState(true);
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const [anchorMe, setAnchorMe] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorMe);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -23,12 +20,9 @@ export default function Navbar() {
     const handleCloseMenu = () => {
         setAnchorMe(null);
     };
-    const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorEl(event.currentTarget);
-    };
 
     const handleClose = () => {
-        setAnchorEl(null);
+        setAnchorMe(null);
     };
 
     return (
