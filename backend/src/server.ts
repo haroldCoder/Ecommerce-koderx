@@ -13,7 +13,7 @@ app.use(bodyParser.json())
 
 const authMiddleware = new AuthMiddleware(process.env.SECRET_KEY as string);
 
-app.use("/api", authMiddleware.authenticate.bind(authMiddleware), require("./routes/products.route"))
+app.use("/api", require("./routes/products.route"))
 
 app.listen(4500, ()=>{
     console.log(`Server on port 4500`);
