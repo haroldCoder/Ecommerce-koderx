@@ -15,7 +15,7 @@ const authMiddleware = new AuthMiddleware(process.env.SECRET_KEY as string);
 
 app.use("/api", authMiddleware.authenticate.bind(authMiddleware), require("./routes/products.route"))
 
-app.listen(4500, ()=>{
-    console.log(`Server on port 4500`);
+app.listen(process.env.PORT, ()=>{
+    console.log(`Server on port ${process.env.PORT}`);
     new ConnectionDB();
 })
