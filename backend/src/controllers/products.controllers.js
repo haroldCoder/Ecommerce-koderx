@@ -16,7 +16,8 @@ const Products_model_1 = __importDefault(require("../models/Products.model"));
 class ProductsControllers {
     constructor(req, res) {
         this.getProducts = () => __awaiter(this, void 0, void 0, function* () {
-            this.res.json(yield this.productsDB.find());
+            const products = yield this.productsDB.find();
+            this.res.json(products);
         });
         this.createProduct = (name, description, imgURI, author, price, category, arrayImg, buys) => __awaiter(this, void 0, void 0, function* () {
             const newProduct = new this.productsDB({

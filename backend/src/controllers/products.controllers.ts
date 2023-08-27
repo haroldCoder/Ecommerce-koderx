@@ -13,7 +13,8 @@ export default class ProductsControllers{
     }
 
     getProducts = async() =>{
-        this.res.json(await this.productsDB.find())
+        const products = await this.productsDB.find()
+        this.res.json(products);
     }
 
     createProduct = async(name: string, description: string, imgURI: string, author: string, price: number, category: string, arrayImg: Array<string>, buys: number) =>{
