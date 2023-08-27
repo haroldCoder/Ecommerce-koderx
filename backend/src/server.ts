@@ -4,9 +4,9 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import ConnectionDB from './connection/mongodb_connect';
 import AuthMiddleware from './middleware/security.middleware';
-const PORT = process.env.PORT || 4500
-dotenv.config();
 
+dotenv.config();
+const PORT = process.env.PORT || 4500
 const app = express();
 app.use(cors());
 app.use(bodyParser.json())
