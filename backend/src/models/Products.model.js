@@ -33,6 +33,7 @@ const product = new mongoose_1.Schema({
     category: { type: String, require: false },
     arrayImg: { type: [String], require: false },
     buys: { type: Number, require: true },
-    created_at: { type: Date, default: Date.now() }
+    created_at: { type: Date, default: Date.now() },
+    key_stripe: { type: String, require: true, unique: false }
 });
 exports.default = mongoose_1.default.model("Products", product);

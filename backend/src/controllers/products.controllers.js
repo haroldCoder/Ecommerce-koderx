@@ -21,7 +21,7 @@ class ProductsControllers {
         this.getProductByID = (id) => __awaiter(this, void 0, void 0, function* () {
             this.res.json(yield this.productsDB.findById(id));
         });
-        this.createProduct = (name, description, imgURI, author, price, category, arrayImg, buys) => __awaiter(this, void 0, void 0, function* () {
+        this.createProduct = (name, description, imgURI, author, price, category, arrayImg, buys, key_stripe) => __awaiter(this, void 0, void 0, function* () {
             const newProduct = new this.productsDB({
                 name: name,
                 description: description,
@@ -30,12 +30,13 @@ class ProductsControllers {
                 price: price,
                 category: category,
                 arrayImg: arrayImg,
-                buys: buys
+                buys: buys,
+                key_stripe: key_stripe
             });
             yield newProduct.save();
             this.res.json('product create');
         });
-        this.updateProduct = (id, name, description, imgURI, author, price, category, arrayImg, buys) => __awaiter(this, void 0, void 0, function* () {
+        this.updateProduct = (id, name, description, imgURI, author, price, category, arrayImg, buys, key_stripe) => __awaiter(this, void 0, void 0, function* () {
             yield this.productsDB.findByIdAndUpdate(id, {
                 name: name,
                 description: description,
@@ -44,7 +45,8 @@ class ProductsControllers {
                 price: price,
                 category: category,
                 arrayImg: arrayImg,
-                buys: buys
+                buys: buys,
+                key_stripe: key_stripe
             });
             this.res.json({ "update id": id });
         });

@@ -11,8 +11,8 @@ router.route("/products")
     new products_controllers_1.default(req, res).getProducts();
 })
     .post((req, res) => {
-    const { name, description, imgURI, author, price, category, arrayImg, buys } = req.body;
-    new products_controllers_1.default(req, res).createProduct(name, description, imgURI, author, price, category, arrayImg, buys);
+    const { name, description, imgURI, author, price, category, arrayImg, buys, key_stripe } = req.body;
+    new products_controllers_1.default(req, res).createProduct(name, description, imgURI, author, price, category, arrayImg, buys, key_stripe);
 });
 router.route("/products/:id")
     .get((req, res) => {
@@ -21,8 +21,8 @@ router.route("/products/:id")
 })
     .patch((req, res) => {
     const { id } = req.params;
-    const { name, description, imgURI, author, price, category, arrayImg, buys } = req.body;
-    new products_controllers_1.default(req, res).updateProduct(parseInt(id), name, description, imgURI, author, price, category, arrayImg, buys);
+    const { name, description, imgURI, author, price, category, arrayImg, buys, key_stripe } = req.body;
+    new products_controllers_1.default(req, res).updateProduct(parseInt(id), name, description, imgURI, author, price, category, arrayImg, buys, key_stripe);
 })
     .delete((req, res) => {
     const { id } = req.params;

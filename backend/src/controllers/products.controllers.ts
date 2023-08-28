@@ -20,7 +20,7 @@ export default class ProductsControllers{
         this.res.json(await this.productsDB.findById(id))
     }
 
-    createProduct = async(name: string, description: string, imgURI: string, author: string, price: number, category: string, arrayImg: Array<string>, buys: number) =>{
+    createProduct = async(name: string, description: string, imgURI: string, author: string, price: number, category: string, arrayImg: Array<string>, buys: number, key_stripe: string) =>{
         const newProduct = new this.productsDB({
             name: name,
             description: description,
@@ -29,14 +29,15 @@ export default class ProductsControllers{
             price: price,
             category: category,
             arrayImg: arrayImg,
-            buys: buys
+            buys: buys,
+            key_stripe: key_stripe
         });
 
         await newProduct.save();
         this.res.json('product create');
     }
 
-    updateProduct = async(id: number, name: string, description: string, imgURI: string, author: string, price: number, category: string, arrayImg: Array<string>, buys: number) =>{
+    updateProduct = async(id: number, name: string, description: string, imgURI: string, author: string, price: number, category: string, arrayImg: Array<string>, buys: number, key_stripe: string) =>{
         await this.productsDB.findByIdAndUpdate(id, {
             name: name,
             description: description,
@@ -45,7 +46,8 @@ export default class ProductsControllers{
             price: price,
             category: category,
             arrayImg: arrayImg,
-            buys: buys
+            buys: buys,
+            key_stripe: key_stripe
         })
 
         this.res.json({"update id": id});

@@ -9,8 +9,8 @@ router.route("/products")
 })
 
 .post((req: Request, res: Response)=>{
-    const {name, description, imgURI, author, price, category, arrayImg, buys} = req.body;
-    new ProductsControllers(req, res).createProduct(name, description, imgURI, author, price, category, arrayImg, buys);
+    const {name, description, imgURI, author, price, category, arrayImg, buys, key_stripe} = req.body;
+    new ProductsControllers(req, res).createProduct(name, description, imgURI, author, price, category, arrayImg, buys, key_stripe);
 })
 
 router.route("/products/:id")
@@ -23,9 +23,9 @@ router.route("/products/:id")
 
 .patch((req: Request, res: Response)=>{
     const {id} = req.params;
-    const {name, description, imgURI, author, price, category, arrayImg, buys} = req.body;
+    const {name, description, imgURI, author, price, category, arrayImg, buys, key_stripe} = req.body;
 
-    new ProductsControllers(req, res).updateProduct(parseInt(id), name, description, imgURI, author, price, category, arrayImg, buys)
+    new ProductsControllers(req, res).updateProduct(parseInt(id), name, description, imgURI, author, price, category, arrayImg, buys, key_stripe)
 })
 
 .delete((req: Request, res: Response)=>{
