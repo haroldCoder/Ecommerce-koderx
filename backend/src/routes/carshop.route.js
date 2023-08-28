@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const carshop_controllers_1 = __importDefault(require("../controllers/carshop.controllers"));
 const router = (0, express_1.Router)();
-router.route("/carshop/:name")
+router.route("/carshop/:user")
     .get((req, res) => {
     const { user } = req.params;
     new carshop_controllers_1.default(req, res).viewProductsInCar(user);

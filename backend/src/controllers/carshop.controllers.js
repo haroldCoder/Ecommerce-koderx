@@ -22,35 +22,40 @@ class Carshop extends CarShop_model_1.default {
             this.res.status(200).json(productscar);
         });
         this.addNewProduct = (user, newproduct) => __awaiter(this, void 0, void 0, function* () {
-            this.productsdb.findOne({ name: user }, (err, result) => {
-                if (err) {
-                    this.res.send(`error in db ${err}`);
-                }
+            console.log(user);
+            this.productsdb.findOne({ author: user })
+                .then(result => {
                 if (result) {
-                    this.carshop.findOne({ user: user }, (err, result) => __awaiter(this, void 0, void 0, function* () {
-                        if (err) {
-                            this.res.send(`error in db ${err}`);
-                        }
+                    this.carshop.findOne({ user: user })
+                        .then((result) => __awaiter(this, void 0, void 0, function* () {
                         if (result) {
-                            this.carshop.findOneAndUpdate({ user: user }, { $push: { products: newproduct } }, { new: true }).then((_res) => {
+                            this.carshop.findOneAndUpdate({ user: user }, { $push: { products: newproduct } }, { new: true })
+                                .then((_res) => {
                                 this.res.status(200).send("add new product car");
-                            }).catch((err) => {
+                            })
+                                .catch((err) => {
                                 this.res.status(500).send(err);
                             });
                         }
                         else {
                             const newshop = new this.carshop({
                                 user: user,
-                                products: [newproduct]
+                                products: [newproduct],
                             });
                             yield newshop.save();
                             this.res.status(200).send("add new product car");
                         }
-                    }));
+                    }))
+                        .catch((err) => {
+                        this.res.status(500).send(`error in db ${err}`);
+                    });
                 }
                 else {
                     this.res.send(`this user not exist in db`);
                 }
+            })
+                .catch((err) => {
+                this.res.status(500).send(`error in db ${err}`);
             });
         });
         this.req = req;

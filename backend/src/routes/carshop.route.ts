@@ -3,7 +3,7 @@ import Carshop from '../controllers/carshop.controllers';
 
 const router = Router();
 
-router.route("/carshop/:name")
+router.route("/carshop/:user")
 .get((req: Request, res: Response)=>{
     const {user} = req.params;
 
