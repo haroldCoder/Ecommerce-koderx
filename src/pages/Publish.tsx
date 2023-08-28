@@ -73,7 +73,8 @@ export default function Publish() {
     arraImg: [],
     category: "",
     buys: 0,
-    created_at: new Date()
+    created_at: new Date(),
+    key_stripe: ""
   })
 
   const handleFileUpload = async (event: any) => {
@@ -175,7 +176,15 @@ export default function Publish() {
             return prev
           })
         }} required type="text" placeholder='Categorie' className='decoration-none outline-none border-b-2 bg-transparent p-2 text-white mb-20 border-blue-600 w-full' />
-
+        <div className='mb-20'>
+          <input onChange={(evt: ChangeEvent<HTMLInputElement>)=>{
+            setData((prev)=>{
+              prev.key_stripe = evt.target.value
+              return prev
+            })
+          }} required type="text" placeholder='key of Stripe' className='decoration-none outline-none border-b-2 bg-transparent p-2 text-white mb-5 border-blue-600 w-full' />
+          <p className='text-white ml-3 mb-3'>you not have key stripe <a className='text-blue-500 hover:text-blue-600' href="https://dashboard.stripe.com/apikeys">https://dashboard.stripe.com/apikeys</a></p>
+        </div>
         <button type='submit' className='px-4 py-2 bg-blue-500 rounded-md text-white w-full hover:bg-blue-700 hover:scale-105'>Create Product</button>
       </section>
     </form>

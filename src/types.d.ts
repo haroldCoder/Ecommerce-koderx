@@ -8,5 +8,6 @@ export interface Products{
     arraImg: Array<string>,
     category: string,
     buys: number,
-    created_at: Date
+    created_at: Date,
+    key_stripe: string
 }

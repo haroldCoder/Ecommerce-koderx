@@ -16,6 +16,20 @@ export default function ProductMaximize() {
         getData();
     },[])
 
+    const payProduct = async() =>{
+        await axios.post(`https://stripe-node-microservice.vercel.app/api/stripe`,{
+            api_key_stripe: data?.key_stripe,
+            mode: "payment",
+            price: data?.price,
+            quantity: 1,
+            currency: 'usd',
+            name: data?.name,
+            success_url: location.href,
+            cancel_url: location.href
+        }).then((res)=>location.href = res.data)
+        .catch((err)=>console.log(err))
+    }
+
   return (
     <div className="p-5 flex gap-x-28">
         <section>
@@ -30,7 +44,7 @@ export default function ProductMaximize() {
             </div>
             <div className="flex mt-10 justify-between">
                 <button className="bg-blue-600 rounded-md text-gray-400 px-4 py-2 w-[45%]">add car</button>
-                <button className="rounded-md text-white hover:bg-white hover:text-black px-4 py-2 w-[45%]">pay now</button> 
+                <button onClick={payProduct} className="rounded-md text-white hover:bg-white hover:text-black px-4 py-2 w-[45%]">pay now</button> 
             </div>
             
         </section>
