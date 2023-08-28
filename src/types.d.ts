@@ -1,5 +1,5 @@
 export interface Products{
-    id: string | undefined,
+    _id: string | undefined,
     name: string,
     description: string,
     imgURI: string,

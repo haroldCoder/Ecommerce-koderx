@@ -64,7 +64,7 @@ export default function Publish() {
     file: [],
     url: []
   });
-  const [data, setData] = useState<Omit<Products, 'id'>>({
+  const [data, setData] = useState<Omit<Products, '_id'>>({
     name: "",
     description: "",
     imgURI: "",

@@ -18,10 +18,11 @@ export default function Home() {
       
         return transformedData;
       });
-      console.log(data);
+      
       
     }
     getProducts();
+    console.log(data);
   }, [])
 
   return (
@@ -30,7 +31,7 @@ export default function Home() {
       <section className='flex flex-wrap justify-between'>
         {
           data.sort((a: Products, b: Products)=>{return b.created_at.getTime() - a.created_at.getTime()}).map((dt: Products)=>(
-            <CardProducts name={dt.name} description={dt.description} imgURI={dt.imgURI} price={dt.price} />
+            <CardProducts id={dt._id!} name={dt.name} description={dt.description} imgURI={dt.imgURI} price={dt.price} />
           ))
         }
       </section>

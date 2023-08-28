@@ -7,6 +7,7 @@ import { RedirectToSignIn, SignedIn, SignedOut } from '@clerk/clerk-react'
 import { ClerkProvider } from '@clerk/clerk-react'
 import { useNavigate } from 'react-router-dom'
 import { dark } from '@clerk/themes';
+import ProductMaximize from "./components/ProductMaximize";
 
 const publicKey = import.meta.env.VITE_CLERK_KEY
 
@@ -41,6 +42,7 @@ function App() {
                 </SignedOut>
               </>
             } />
+            <Route path="/cards/:id" element={<ProductMaximize/>} />
           </Routes>
         </ClerkProvider>
       </BrowserRouter>
