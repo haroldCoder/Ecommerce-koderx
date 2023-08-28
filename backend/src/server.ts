@@ -14,6 +14,7 @@ app.use(bodyParser.json())
 const authMiddleware = new AuthMiddleware(process.env.SECRET_KEY as string);
 
 app.use("/api", authMiddleware.authenticate.bind(authMiddleware), require("./routes/products.route"))
+app.use("/api", authMiddleware.authenticate.bind(authMiddleware), require("./routes/carshop.route"))
 
 app.listen(PORT, ()=>{
     console.log(`Server on port ${PORT}`);
