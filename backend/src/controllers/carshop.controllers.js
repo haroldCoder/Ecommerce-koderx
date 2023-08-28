@@ -18,7 +18,7 @@ class Carshop extends CarShop_model_1.default {
     constructor(req, res) {
         super();
         this.viewProductsInCar = (user) => __awaiter(this, void 0, void 0, function* () {
-            const productscar = this.carshop.findOne({ user: user });
+            const productscar = yield this.carshop.findOne({ user: user });
             this.res.status(200).json(productscar);
         });
         this.addNewProduct = (user, newproduct) => __awaiter(this, void 0, void 0, function* () {

@@ -17,7 +17,7 @@ export default class Carshop extends CarShopModel {
     }
 
     viewProductsInCar = async (user: string) => {
-        const productscar = this.carshop.findOne({ user: user })
+        const productscar = await this.carshop.findOne({ user: user })
 
         this.res.status(200).json(productscar);
     }
