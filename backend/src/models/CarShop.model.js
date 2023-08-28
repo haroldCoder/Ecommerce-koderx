@@ -28,4 +28,4 @@ const carshop = new mongoose_1.Schema({
     user: { type: String, require: true, unique: true },
     products: { type: [String], require: true, unique: false }
 });
-exports.default = mongoose_1.default.model("carShop", carshop);
+exports.default = mongoose_1.default.model("carshops", carshop);

@@ -6,4 +6,4 @@ const carshop = new Schema({
     products: {type: [String], require: true, unique: false}
 })
 
-export default mongoose.model("carShop", carshop);
+export default mongoose.model("carshops", carshop);
