@@ -7,24 +7,24 @@ import { useUser } from "@clerk/clerk-react";
 import axios from 'axios';
 
 
-const SubImages : React.FC<{image: string; setImg: Dispatch<SetStateAction<{ file: any[]; url: string[]; }>>, index: number}> = ({image, setImg, index}) => {
-  const arrayHandleUpload = async (event: any) =>{
+const SubImages: React.FC<{ image: string; setImg: Dispatch<SetStateAction<{ file: any[]; url: string[]; }>>, index: number }> = ({ image, setImg, index }) => {
+  const arrayHandleUpload = async (event: any) => {
     const file = event.target.files[0];
     if (file) {
-      setImg((prev)=>{
+      setImg((prev) => {
         const newarrayfile = [...prev.file]
         const newarrayurl = [...prev.url]
 
         newarrayfile[index] = file
         newarrayurl[index] = URL.createObjectURL(file)
 
-        return{
+        return {
           file: newarrayfile,
           url: newarrayurl
         }
       });
-      
-    }  
+
+    }
   }
 
   return (
@@ -56,11 +56,11 @@ const SubImages : React.FC<{image: string; setImg: Dispatch<SetStateAction<{ fil
 
 export default function Publish() {
   const { user } = useUser();
-  const [image, setImage] = useState<{file: any; url: string}>({
+  const [image, setImage] = useState<{ file: any; url: string }>({
     file: null,
     url: ""
   });
-  const [arrayImgs, setArrayImgs] = useState<{file: Array<any>; url: Array<string>}>({
+  const [arrayImgs, setArrayImgs] = useState<{ file: Array<any>; url: Array<string> }>({
     file: [],
     url: []
   });
@@ -80,37 +80,37 @@ export default function Publish() {
   const handleFileUpload = async (event: any) => {
     const file = event.target.files[0];
     if (file) {
-      setImage((prev)=>{
-        return{
+      setImage((prev) => {
+        return {
           ...prev,
           file: file,
           url: URL.createObjectURL(file)
         }
       });
     }
-    
+
   };
 
-  const SendData = async(evt: ChangeEvent<HTMLFormElement>) =>{
+  const SendData = async (evt: ChangeEvent<HTMLFormElement>) => {
     evt.preventDefault();
     const urlimg = await uploadToCloudinary(image.file)
-    const urlsimgs : Array<string> = []
-    arrayImgs.file.map(async(e, index: number)=>{
-      urlsimgs[index] = await uploadToCloudinary(e).then((e)=>{return e.url})
+    const urlsimgs: Array<string> = []
+    arrayImgs.file.map(async (e, index: number) => {
+      urlsimgs[index] = await uploadToCloudinary(e).then((e) => { return e.url })
     })
     console.log(urlsimgs);
-    
-    setData((prev)=>{
+
+    setData((prev) => {
       prev.imgURI = urlimg.url
       prev.arraImg = urlsimgs
       return prev
     })
 
-    axios.post(`${import.meta.env.VITE_API_URL}products?username=${import.meta.env.VITE_ACCESS}`,data)
-    .then((res)=>console.log(res))
-    .catch((err)=>console.log(err))
+    axios.post(`${import.meta.env.VITE_API_URL}products?username=${import.meta.env.VITE_ACCESS}`, data)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err))
   }
- 
+
   return (
     <form onSubmit={SendData} className='p-10 flex w-[95%] justify-between'>
       <section className='w-[60%] flex flex-col gap-6'>
@@ -120,7 +120,7 @@ export default function Publish() {
               id="file-input"
               type="file"
               style={{ display: 'none' }}
-              onChange={handleFileUpload} 
+              onChange={handleFileUpload}
               required
             />
             <label htmlFor="file-input">
@@ -152,33 +152,33 @@ export default function Publish() {
         </div>
       </section>
       <section className='w-[60%] ml-40'>
-        <input required onChange={(evt: ChangeEvent<HTMLInputElement>)=>{
-          setData((prev)=>{
+        <input required onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+          setData((prev) => {
             prev.name = evt.target.value
             return prev
           })
         }} type="text" placeholder='Name of product' className='decoration-none outline-none border-b-2 bg-transparent p-2 mb-20 text-white border-blue-600 w-full' />
-        <input onChange={(evt: ChangeEvent<HTMLInputElement>)=>{
-          setData((prev)=>{
+        <input onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+          setData((prev) => {
             prev.description = evt.target.value
             return prev
           })
         }} required type="text" placeholder='Description' className='decoration-none outline-none border-b-2 bg-transparent p-2 mb-20 text-white border-blue-600 w-full' />
-        <input onChange={(evt: ChangeEvent<HTMLInputElement>)=>{
-          setData((prev)=>{
+        <input onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+          setData((prev) => {
             prev.price = parseInt(evt.target.value)
             return prev
           })
         }} required type="number" placeholder='Price' className='decoration-none outline-none border-b-2 bg-transparent p-2 text-white  border-blue-600 mb-20 w-full' />
-        <input onChange={(evt: ChangeEvent<HTMLInputElement>)=>{
-          setData((prev)=>{
+        <input onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+          setData((prev) => {
             prev.category = evt.target.value
             return prev
           })
         }} required type="text" placeholder='Categorie' className='decoration-none outline-none border-b-2 bg-transparent p-2 text-white mb-20 border-blue-600 w-full' />
         <div className='mb-20'>
-          <input onChange={(evt: ChangeEvent<HTMLInputElement>)=>{
-            setData((prev)=>{
+          <input onChange={(evt: ChangeEvent<HTMLInputElement>) => {
+            setData((prev) => {
               prev.key_stripe = evt.target.value
               return prev
             })
