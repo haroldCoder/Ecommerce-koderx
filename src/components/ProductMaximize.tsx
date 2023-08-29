@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react"
+import { useMemo, useState } from "react"
 import { Products } from "../types"
 import axios from "axios";
 import {useParams} from 'react-router-dom'
