@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { carShop, productShop } from '../types'
 import axios from 'axios'
 import { useUser } from '@clerk/clerk-react'
