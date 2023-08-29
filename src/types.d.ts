@@ -13,7 +13,7 @@ export interface Products{
 }
 
 export interface carShop{
-    _id: string | undefined,
+    id: string | undefined,
     user: string,
     products: Array<string>
 }
