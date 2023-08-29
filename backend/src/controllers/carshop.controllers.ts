@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import ProductsModel from "../models/Products.model";
 import CarShopModel from "../models/CarShop.model";
+import ProductsControllers from "./products.controllers";
 
 export default class Carshop extends CarShopModel {
     req: Request;
@@ -24,7 +25,7 @@ export default class Carshop extends CarShopModel {
 
     addNewProduct = async (user: string, newproduct: string) => {
         console.log(user);
-        
+
         this.productsdb.findOne({ author: user })
             .then(result => {
                 if (result) {
@@ -61,5 +62,23 @@ export default class Carshop extends CarShopModel {
             .catch((err) => {
                 this.res.status(500).send(`error in db ${err}`);
             });
+    }
+
+    returnProductsByIds = async (arraysId: Array<string>) => {
+        const products = new ProductsControllers(this.req, this.res)
+        const newArray: any[] = [];
+
+        await Promise.all(arraysId.map(async (e, index: number) => {
+            const product = await products.getProductByID(e, true);
+            newArray[index] = {
+                id: product?.id,
+                name: product?.name,
+                price: product?.price,
+                imgURI: product?.imgURI
+            };
+        }));
+
+        // Luego, envía la respuesta después de que todas las Promesas se hayan resuelto
+        this.res.status(200).json(newArray);
     }
 }

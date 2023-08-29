@@ -10,6 +10,13 @@ router.route("/carshop/:user")
     new Carshop(req, res).viewProductsInCar(user);
 })
 
+router.route("/carshop-ids")
+.post((req: Request, res: Response)=>{
+    const {arrayids} = req.body;
+
+    new Carshop(req, res).returnProductsByIds(arrayids);
+})
+
 router.route("/carshop")
 .post((req: Request, res: Response)=>{
     const {user, newProduct} = req.body;

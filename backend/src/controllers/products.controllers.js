@@ -18,8 +18,13 @@ class ProductsControllers {
         this.getProducts = () => __awaiter(this, void 0, void 0, function* () {
             this.res.json(yield this.productsDB.find());
         });
-        this.getProductByID = (id) => __awaiter(this, void 0, void 0, function* () {
-            this.res.json(yield this.productsDB.findById(id));
+        this.getProductByID = (id, ret = false) => __awaiter(this, void 0, void 0, function* () {
+            if (!ret) {
+                this.res.json(yield this.productsDB.findById(id));
+            }
+            else {
+                return yield this.productsDB.findById(id);
+            }
         });
         this.createProduct = (name, description, imgURI, author, price, category, arrayImg, buys, key_stripe) => __awaiter(this, void 0, void 0, function* () {
             const newProduct = new this.productsDB({

@@ -11,6 +11,11 @@ router.route("/carshop/:user")
     const { user } = req.params;
     new carshop_controllers_1.default(req, res).viewProductsInCar(user);
 });
+router.route("/carshop-ids")
+    .post((req, res) => {
+    const { arrayids } = req.body;
+    new carshop_controllers_1.default(req, res).returnProductsByIds(arrayids);
+});
 router.route("/carshop")
     .post((req, res) => {
     const { user, newProduct } = req.body;

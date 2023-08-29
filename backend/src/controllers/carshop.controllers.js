@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const Products_model_1 = __importDefault(require("../models/Products.model"));
 const CarShop_model_1 = __importDefault(require("../models/CarShop.model"));
+const products_controllers_1 = __importDefault(require("./products.controllers"));
 class Carshop extends CarShop_model_1.default {
     constructor(req, res) {
         super();
@@ -57,6 +58,21 @@ class Carshop extends CarShop_model_1.default {
                 .catch((err) => {
                 this.res.status(500).send(`error in db ${err}`);
             });
+        });
+        this.returnProductsByIds = (arraysId) => __awaiter(this, void 0, void 0, function* () {
+            const products = new products_controllers_1.default(this.req, this.res);
+            const newArray = [];
+            yield Promise.all(arraysId.map((e, index) => __awaiter(this, void 0, void 0, function* () {
+                const product = yield products.getProductByID(e, true);
+                newArray[index] = {
+                    id: product === null || product === void 0 ? void 0 : product.id,
+                    name: product === null || product === void 0 ? void 0 : product.name,
+                    price: product === null || product === void 0 ? void 0 : product.price,
+                    imgURI: product === null || product === void 0 ? void 0 : product.imgURI
+                };
+            })));
+            // Luego, envía la respuesta después de que todas las Promesas se hayan resuelto
+            this.res.status(200).json(newArray);
         });
         this.req = req;
         this.res = res;
