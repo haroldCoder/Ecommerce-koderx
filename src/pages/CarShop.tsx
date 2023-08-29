@@ -43,7 +43,8 @@ export default function CarShop() {
                   <img src={e.imgURI} className="h-[10vh] rounded-md" alt={e.name} />
                 </div>
                 <div>
-                  <h2 className="text-white">{e.name}</h2>
+                  <h2 className="text-white mb-2">{e.name}</h2>
+                  <p className='text-green-400'>{e.price} $</p>
                 </div>
               </section>
               <section className="flex gap-x-8">
