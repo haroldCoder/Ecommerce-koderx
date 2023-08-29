@@ -22,5 +22,6 @@ export interface productShop{
     _id?: string | undefined,
     name: string,
     price: number,
-    imgURI: string
+    imgURI: string,
+    key_stripe: string
 }
