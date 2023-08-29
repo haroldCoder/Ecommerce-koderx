@@ -32,6 +32,14 @@ export default function CarShop() {
         .catch((err)=>console.log(err))
       }
 
+      const RemovefromCarshop = async(id: string | undefined) =>{
+        console.log(id);
+        
+        await axios.delete(`${import.meta.env.VITE_API_URL}carshop/${id}/${user?.firstName}?username=${import.meta.env.VITE_ACCESS}`)
+        .then(()=>alert("product remove"))
+        .catch((err)=>console.log(err))
+      }
+
     return (
         <div className="mx-[20%]">
         {
@@ -49,7 +57,7 @@ export default function CarShop() {
               </section>
               <section className="flex gap-x-8">
                 <button className="bg-green-600 hover:bg-green-700 p-2 rounded-md w-24 h-10 text-white" onClick={()=>payProduct(e.key_stripe, e.price, e.name)}>Pay now</button>
-                <button className="bg-red-600 hover:bg-red-800 p-2 rounded-md w-24 h-10 text-white">Cancel</button>
+                <button onClick={()=>RemovefromCarshop(e.id)} className="bg-red-600 hover:bg-red-800 p-2 rounded-md w-24 h-10 text-white">Cancel</button>
               </section>
             </div>
           ))
