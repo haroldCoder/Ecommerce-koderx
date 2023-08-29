@@ -82,4 +82,27 @@ export default class Carshop extends CarShopModel {
         // Luego, envía la respuesta después de que todas las Promesas se hayan resuelto
         this.res.status(200).json(newArray);
     }
+
+    deleteProductcarShop = async(id: string, user: string)=>{
+        this.carshop.findOne({user: user}).then((res)=>{
+            if(res){
+                this.carshop.findOneAndUpdate(
+                    {user: user},
+                    {$pull: {products: id}},
+                    {new: true}
+                )
+                .then(()=>{
+                    this.res.status(200).send("product delete")
+                })
+                .catch(()=>{
+                    this.res.status(500).send("error in to db");
+                })
+            }
+            else{
+                this.res.status(500).send('user not found in db');
+            }
+        }).catch(err=>{console.log(err);
+                this.res.status(500).send('an ocurre error in db');
+            })
+    }
 }
