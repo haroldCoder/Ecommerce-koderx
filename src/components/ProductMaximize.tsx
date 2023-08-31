@@ -37,7 +37,8 @@ export default function ProductMaximize() {
             user: user?.fullName,
             newProduct: id
         })
-        .then(()=>alert("product add to carshop"))
+        .then((res)=>console.log(res)
+        )
         .catch((err)=>console.log(err))
     }
 

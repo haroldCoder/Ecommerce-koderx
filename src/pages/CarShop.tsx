@@ -9,7 +9,7 @@ export default function CarShop() {
 
     useEffect(() => {
         const getData = async () => {
-            const res: carShop = (await axios.get(`${import.meta.env.VITE_API_URL}carshop/${user?.firstName}?username=${import.meta.env.VITE_ACCESS}`)).data;
+            const res: carShop = (await axios.get(`${import.meta.env.VITE_API_URL}carshop/${user?.fullName}?username=${import.meta.env.VITE_ACCESS}`)).data;
             await axios.post(`${import.meta.env.VITE_API_URL}carshop-ids?username=${import.meta.env.VITE_ACCESS}`,{
                 arrayids: res.products
             })
@@ -35,7 +35,7 @@ export default function CarShop() {
       const RemovefromCarshop = async(id: string | undefined) =>{
         console.log(id);
         
-        await axios.delete(`${import.meta.env.VITE_API_URL}carshop/${id}/${user?.firstName}?username=${import.meta.env.VITE_ACCESS}`)
+        await axios.delete(`${import.meta.env.VITE_API_URL}carshop/${id}/${user?.fullName}?username=${import.meta.env.VITE_ACCESS}`)
         .then(()=>alert("product remove"))
         .catch((err)=>console.log(err))
       }

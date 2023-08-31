@@ -25,38 +25,27 @@ export default class Carshop extends CarShopModel {
 
     addNewProduct = async (user: string, newproduct: string) => {
         console.log(user);
-
-        this.productsdb.findOne({ author: user })
-            .then(result => {
+        this.carshop.findOne({ user: user })
+            .then(async (result) => {
                 if (result) {
-                    this.carshop.findOne({ user: user })
-                        .then(async (result) => {
-                            if (result) {
-                                this.carshop.findOneAndUpdate(
-                                    { user: user },
-                                    { $push: { products: newproduct } },
-                                    { new: true }
-                                )
-                                    .then((_res) => {
-                                        this.res.status(200).send("add new product car");
-                                    })
-                                    .catch((err) => {
-                                        this.res.status(500).send(err);
-                                    });
-                            } else {
-                                const newshop = new this.carshop({
-                                    user: user,
-                                    products: [newproduct],
-                                });
-                                await newshop.save();
-                                this.res.status(200).send("add new product car");
-                            }
+                    this.carshop.findOneAndUpdate(
+                        { user: user },
+                        { $push: { products: newproduct } },
+                        { new: true }
+                    )
+                        .then((_res) => {
+                            this.res.status(200).send("add new product car");
                         })
                         .catch((err) => {
-                            this.res.status(500).send(`error in db ${err}`);
+                            this.res.status(500).send(err);
                         });
                 } else {
-                    this.res.send(`this user not exist in db`);
+                    const newshop = new this.carshop({
+                        user: user,
+                        products: [newproduct],
+                    });
+                    await newshop.save();
+                    this.res.status(200).send("add new product car");
                 }
             })
             .catch((err) => {
@@ -83,26 +72,27 @@ export default class Carshop extends CarShopModel {
         this.res.status(200).json(newArray);
     }
 
-    deleteProductcarShop = async(id: string, user: string)=>{
-        this.carshop.findOne({user: user}).then((res)=>{
-            if(res){
+    deleteProductcarShop = async (id: string, user: string) => {
+        this.carshop.findOne({ user: user }).then((res) => {
+            if (res) {
                 this.carshop.findOneAndUpdate(
-                    {user: user},
-                    {$pull: {products: id}},
-                    {new: true}
+                    { user: user },
+                    { $pull: { products: id } },
+                    { new: true }
                 )
-                .then(()=>{
-                    this.res.status(200).send("product delete")
-                })
-                .catch(()=>{
-                    this.res.status(500).send("error in to db");
-                })
+                    .then(() => {
+                        this.res.status(200).send("product delete")
+                    })
+                    .catch(() => {
+                        this.res.status(500).send("error in to db");
+                    })
             }
-            else{
+            else {
                 this.res.status(500).send('user not found in db');
             }
-        }).catch(err=>{console.log(err);
-                this.res.status(500).send('an ocurre error in db');
-            })
+        }).catch(err => {
+            console.log(err);
+            this.res.status(500).send('an ocurre error in db');
+        })
     }
 }
