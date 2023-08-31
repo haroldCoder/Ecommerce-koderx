@@ -34,7 +34,7 @@ export default function ProductMaximize() {
 
     const reserveProduct = (id: string | undefined) =>{
         axios.post(`${import.meta.env.VITE_API_URL}carshop?username=${import.meta.env.VITE_ACCESS}`,{
-            user: user?.firstName,
+            user: user?.fullName,
             newProduct: id
         })
         .then(()=>alert("product add to carshop"))

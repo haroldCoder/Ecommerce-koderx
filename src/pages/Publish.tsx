@@ -69,7 +69,7 @@ export default function Publish() {
     description: "",
     imgURI: "",
     price: 0,
-    author: user?.firstName || "",
+    author: user?.fullName || "",
     arraImg: [],
     category: "",
     buys: 0,
