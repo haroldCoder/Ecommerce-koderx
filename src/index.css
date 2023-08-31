@@ -5,3 +5,13 @@
 :root {
   background-color: #000000;
 }
+
+.options:hover{
+  background: #0077ff !important;
+  color: #FFF !important;
+  
+}
+.options{
+  margin: 0 5px !important;
+  border-radius: 6px !important;
+}

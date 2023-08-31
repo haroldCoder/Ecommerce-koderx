@@ -14,6 +14,32 @@ import { Link } from 'react-router-dom';
 export default function Navbar() {
     const [anchorMe, setAnchorMe] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorMe);
+    const [categories, setCategories] = React.useState<Array<string>>(
+        [
+            "Games & Entertainment",
+            "Electronics",
+            "Clothing & Fashion",
+            "Home & Garden",
+            "Beauty & Personal Care",
+            "Sports & Outdoors",
+            "Books & Literature",
+            "Toys & Hobbies",
+            "Health & Wellness",
+            "Food & Grocery",
+            "Jewelry & Accessories",
+            "Automotive",
+            "Music & Instruments",
+            "Office & School Supplies",
+            "Pet Supplies",
+            "Art & Craft",
+            "Travel & Luggage",
+            "Fitness & Exercise",
+            "Electrical Appliances",
+            "Baby & Maternity",
+            "Party Supplies"
+        ]        
+    )
+
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorMe(event.currentTarget);
     };
@@ -73,9 +99,11 @@ export default function Navbar() {
                                 'aria-labelledby': 'basic-button',
                                 }}
                             >
-                                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                                <MenuItem onClick={handleClose}>My account</MenuItem>
-                                <MenuItem onClick={handleClose}>Logout</MenuItem>
+                                {
+                                    categories.map((e)=>(
+                                        <MenuItem className='options' onClick={handleClose}>{e}</MenuItem>
+                                    ))
+                                }
                             </Menu>
                         </div>
                     </div>
