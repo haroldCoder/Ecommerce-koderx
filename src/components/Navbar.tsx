@@ -14,7 +14,7 @@ import { Link } from 'react-router-dom';
 export default function Navbar() {
     const [anchorMe, setAnchorMe] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorMe);
-    const [categories, setCategories] = React.useState<Array<string>>(
+    const [categories] = React.useState<Array<string>>(
         [
             "Games & Entertainment",
             "Electronics",
