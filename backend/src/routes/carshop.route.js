@@ -25,5 +25,9 @@ router.route("/carshop/:id/:user")
     .delete((req, res) => {
     const { id, user } = req.params;
     new carshop_controllers_1.default(req, res).deleteProductcarShop(id, user);
+})
+    .get((req, res) => {
+    const { id, user } = req.params;
+    new carshop_controllers_1.default(req, res).EmptyProduct(id, user);
 });
 module.exports = router;

@@ -30,5 +30,10 @@ router.route("/carshop/:id/:user")
 
     new Carshop(req, res).deleteProductcarShop(id, user);
 })
+.get((req: Request, res: Response)=>{
+    const {id, user} = req.params;
+
+    new Carshop(req, res).EmptyProduct(id, user);
+})
 
 module.exports = router;

@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import ProductsModel from "../models/Products.model";
 import CarShopModel from "../models/CarShop.model";
 import ProductsControllers from "./products.controllers";
+import mongoose from "mongoose";
 
 export default class Carshop extends CarShopModel {
     req: Request;
@@ -93,6 +94,21 @@ export default class Carshop extends CarShopModel {
         }).catch(err => {
             console.log(err);
             this.res.status(500).send('an ocurre error in db');
+        })
+    }
+
+    EmptyProduct = (id: string, user: string) =>{
+        this.carshop.findOne({user: user, products: new mongoose.Types.ObjectId(id)})
+        .then((res)=>{
+            if(res){
+              this.res.status(200).send("product exist in carshop")  
+            }
+            else{
+                this.res.status(404).send("product not exist in carshop")  
+            }
+        })
+        .catch((err)=>{
+            this.res.status(500).send(err);
         })
     }
 }
