@@ -8,9 +8,8 @@ import { useNavigate } from 'react-router-dom'
 import { dark } from '@clerk/themes';
 import ProductMaximize from "./components/ProductMaximize";
 import CarShop from "./pages/CarShop";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Products } from "./types";
-import axios from "axios";
 
 const publicKey = import.meta.env.VITE_CLERK_KEY
 

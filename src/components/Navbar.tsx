@@ -55,7 +55,7 @@ export default function Navbar({setData, change} : {setData: React.Dispatch<Reac
     const handleClose = async(evt :string) => {
         change.current = true;
         const data = await (await axios.get(`${import.meta.env.VITE_API_URL}products/?categorie=${evt}&username=${import.meta.env.VITE_ACCESS}`)).data
-        setData(prev=>{
+        setData(()=>{
             return data.map((e : Products)=>({
                 ...e,
                 created_at: new Date(e.created_at)
