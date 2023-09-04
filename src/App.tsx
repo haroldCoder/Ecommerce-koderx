@@ -8,10 +8,15 @@ import { useNavigate } from 'react-router-dom'
 import { dark } from '@clerk/themes';
 import ProductMaximize from "./components/ProductMaximize";
 import CarShop from "./pages/CarShop";
+import { useEffect, useRef, useState } from "react";
+import { Products } from "./types";
+import axios from "axios";
 
 const publicKey = import.meta.env.VITE_CLERK_KEY
 
 function App() {
+  const [data, setData] = useState<Products[]>([]);
+  const change = useRef<boolean>(false);
 
   return (
     <>
@@ -19,9 +24,9 @@ function App() {
         <ClerkProvider appearance={{
           baseTheme: dark
         }} publishableKey={publicKey} navigate={(to) => { const navaigate = useNavigate(); navaigate(to) }}>
-          <Navbar />
+          <Navbar setData={setData} change={change} />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home data={data} change={change} setData={setData} />} />
             <Route path="/publish" element={
               <>
                 <SignedIn>

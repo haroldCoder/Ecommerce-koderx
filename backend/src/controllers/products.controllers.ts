@@ -16,6 +16,10 @@ export default class ProductsControllers{
         this.res.json(await this.productsDB.find())
     }
 
+    getProductCategorie = async(categorie: string) =>{
+        this.res.json(await this.productsDB.find({category: categorie}));
+    }
+
     getProductByID = async(id: string, ret: boolean = false) =>{
         if(!ret){
           this.res.json(await this.productsDB.findById(id))  

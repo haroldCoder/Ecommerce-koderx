@@ -8,7 +8,12 @@ const express_1 = require("express");
 const router = (0, express_1.Router)();
 router.route("/products")
     .get((req, res) => {
-    new products_controllers_1.default(req, res).getProducts();
+    if (!req.query.categorie) {
+        new products_controllers_1.default(req, res).getProducts();
+    }
+    else {
+        new products_controllers_1.default(req, res).getProductCategorie(req.query.categorie);
+    }
 })
     .post((req, res) => {
     const { name, description, imgURI, author, price, category, arrayImg, buys, key_stripe } = req.body;

@@ -5,7 +5,12 @@ const router = Router();
 
 router.route("/products")
 .get((req: Request, res: Response)=>{
-    new ProductsControllers(req, res).getProducts();
+    if(!req.query.categorie){
+       new ProductsControllers(req, res).getProducts(); 
+    }
+    else{
+        new ProductsControllers(req, res).getProductCategorie(req.query.categorie as string);
+    }
 })
 
 .post((req: Request, res: Response)=>{

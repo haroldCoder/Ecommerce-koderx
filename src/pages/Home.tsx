@@ -1,29 +1,28 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, useEffect, SetStateAction } from 'react';
 import Banner from '../components/Banner'
 import { Products } from '../types';
 import axios from 'axios';
 import CardProducts from '../components/CardProducts';
 
-export default function Home() {
-  const [data, setData] = useState<Products[]>([]);
+export default function Home({data, setData, change}: {data: Products[], setData: Dispatch<SetStateAction<Products[]>>, change: React.MutableRefObject<boolean>}) {
 
-  useEffect(()=>{
-    const getProducts = async() =>{
-      const res : Products[] = (await axios.get(`${import.meta.env.VITE_API_URL}products?username=${import.meta.env.VITE_ACCESS}`)).data;
+  useEffect(() => {
+    const getProducts = async () => {
+      const res: Products[] = (await axios.get(`${import.meta.env.VITE_API_URL}products?username=${import.meta.env.VITE_ACCESS}`)).data;
+      !change.current ?
       setData(() => {
-        const transformedData = res.map((e : Products) => ({
+        const transformedData = res.map((e: Products) => ({
           ...e,
           created_at: new Date(e.created_at)
         }));
-      
+
         return transformedData;
-      });
-      
-      
+      })
+      : null
     }
+    
     getProducts();
-    console.log(data);
-  }, [])
+  }, [change, data]);
 
   return (
     <div>

@@ -10,8 +10,10 @@ import Menu from '@mui/material/Menu';
 import { Button} from '@mui/material';
 import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/clerk-react';
 import { Link } from 'react-router-dom';
+import { Products } from '../types';
+import axios from 'axios';
 
-export default function Navbar() {
+export default function Navbar({setData, change} : {setData: React.Dispatch<React.SetStateAction<Products[]>>, change: React.MutableRefObject<boolean>}) {
     const [anchorMe, setAnchorMe] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorMe);
     const [categories] = React.useState<Array<string>>(
@@ -36,18 +38,29 @@ export default function Navbar() {
             "Fitness & Exercise",
             "Electrical Appliances",
             "Baby & Maternity",
-            "Party Supplies"
+            "Party Supplies",
+            "Tecnology"
         ]        
     )
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorMe(event.currentTarget);
+        console.log(anchorMe);
+        
     };
     const handleCloseMenu = () => {
         setAnchorMe(null);
     };
 
-    const handleClose = () => {
+    const handleClose = async(evt :string) => {
+        change.current = true;
+        const data = await (await axios.get(`${import.meta.env.VITE_API_URL}products/?categorie=${evt}&username=${import.meta.env.VITE_ACCESS}`)).data
+        setData(prev=>{
+            return data.map((e : Products)=>({
+                ...e,
+                created_at: new Date(e.created_at)
+            }))
+        })
         setAnchorMe(null);
     };
 
@@ -65,7 +78,7 @@ export default function Navbar() {
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Link to="/">
+                        <Link to="/" onClick={()=>change.current = false}>
                             <Typography className='text-md hover:text-blue-300 cursor-pointer w-auto'>
                                 Home
                             </Typography>
@@ -101,7 +114,7 @@ export default function Navbar() {
                             >
                                 {
                                     categories.map((e)=>(
-                                        <MenuItem className='options' onClick={handleClose}>{e}</MenuItem>
+                                        <MenuItem className='options' onClick={()=>handleClose(e)}>{e}</MenuItem>
                                     ))
                                 }
                             </Menu>

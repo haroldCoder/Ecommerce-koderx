@@ -18,6 +18,9 @@ class ProductsControllers {
         this.getProducts = () => __awaiter(this, void 0, void 0, function* () {
             this.res.json(yield this.productsDB.find());
         });
+        this.getProductCategorie = (categorie) => __awaiter(this, void 0, void 0, function* () {
+            this.res.json(yield this.productsDB.find({ category: categorie }));
+        });
         this.getProductByID = (id, ret = false) => __awaiter(this, void 0, void 0, function* () {
             if (!ret) {
                 this.res.json(yield this.productsDB.findById(id));
