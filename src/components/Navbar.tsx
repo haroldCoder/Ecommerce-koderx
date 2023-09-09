@@ -7,13 +7,14 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
-import { Button} from '@mui/material';
+import { Button } from '@mui/material';
 import { SignInButton, SignedIn, SignedOut, UserButton } from '@clerk/clerk-react';
 import { Link } from 'react-router-dom';
 import { Products } from '../types';
 import axios from 'axios';
+import Search from './Search';
 
-export default function Navbar({setData, change} : {setData: React.Dispatch<React.SetStateAction<Products[]>>, change: React.MutableRefObject<boolean>}) {
+export default function Navbar({ setData, change }: { setData: React.Dispatch<React.SetStateAction<Products[]>>, change: React.MutableRefObject<boolean> }) {
     const [anchorMe, setAnchorMe] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorMe);
     const [categories] = React.useState<Array<string>>(
@@ -40,23 +41,23 @@ export default function Navbar({setData, change} : {setData: React.Dispatch<Reac
             "Baby & Maternity",
             "Party Supplies",
             "Tecnology"
-        ]        
+        ]
     )
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorMe(event.currentTarget);
         console.log(anchorMe);
-        
+
     };
     const handleCloseMenu = () => {
         setAnchorMe(null);
     };
 
-    const handleClose = async(evt :string) => {
+    const handleClose = async (evt: string) => {
         change.current = true;
         const data = await (await axios.get(`${import.meta.env.VITE_API_URL}products/?categorie=${evt}&username=${import.meta.env.VITE_ACCESS}`)).data
-        setData(()=>{
-            return data.map((e : Products)=>({
+        setData(() => {
+            return data.map((e: Products) => ({
                 ...e,
                 created_at: new Date(e.created_at)
             }))
@@ -66,7 +67,7 @@ export default function Navbar({setData, change} : {setData: React.Dispatch<Reac
 
     return (
         <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static" className='p-2' style={{background: "#111"}}>
+            <AppBar position="static" className='p-2' style={{ background: "#111" }}>
                 <Toolbar className='w-full flex items-center justify-between'>
                     <div className='flex w-[40%] justify-between items-center'>
                         <IconButton
@@ -78,7 +79,7 @@ export default function Navbar({setData, change} : {setData: React.Dispatch<Reac
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Link to="/" onClick={()=>change.current = false}>
+                        <Link to="/" onClick={() => change.current = false}>
                             <Typography className='text-md hover:text-blue-300 cursor-pointer w-auto'>
                                 Home
                             </Typography>
@@ -109,24 +110,27 @@ export default function Navbar({setData, change} : {setData: React.Dispatch<Reac
                                 open={open}
                                 onClose={handleCloseMenu}
                                 MenuListProps={{
-                                'aria-labelledby': 'basic-button',
+                                    'aria-labelledby': 'basic-button',
                                 }}
                             >
                                 {
-                                    categories.map((e)=>(
-                                        <MenuItem className='options' onClick={()=>handleClose(e)}>{e}</MenuItem>
+                                    categories.map((e) => (
+                                        <MenuItem className='options' onClick={() => handleClose(e)}>{e}</MenuItem>
                                     ))
                                 }
                             </Menu>
                         </div>
                     </div>
-                    
-                    <SignedIn>
-                        <UserButton afterSignOutUrl={window.location.href} />
-                    </SignedIn>
-                    <SignedOut>
-                        <SignInButton mode='modal' />
-                    </SignedOut>
+
+                    <div className='flex justify-between w-[25%]'>
+                        <Search />
+                        <SignedIn>
+                            <UserButton afterSignOutUrl={window.location.href} />
+                        </SignedIn>
+                        <SignedOut>
+                            <SignInButton mode='modal' />
+                        </SignedOut>
+                    </div>
                 </Toolbar>
             </AppBar>
         </Box>
