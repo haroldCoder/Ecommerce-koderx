@@ -62,6 +62,27 @@ class ProductsControllers {
             yield this.productsDB.findByIdAndDelete(id);
             this.res.json({ "remove id": id });
         });
+        this.searchProduct = (searchinp) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                // user reggex expression for search words similar in the input name
+                const nameResults = yield this.productsDB.find({ name: { $regex: searchinp, $options: 'i' } });
+                //use reggex expression for search words similar in the input categoria
+                const categoryResults = yield this.productsDB.find({ category: { $regex: searchinp, $options: 'i' } });
+                // combine result category and name
+                const results = [...nameResults, ...categoryResults];
+                // if exist the results, return them
+                if (results.length > 0) {
+                    this.res.status(200).json(results);
+                }
+                else {
+                    // if not found, so not return
+                    this.res.status(404);
+                }
+            }
+            catch (err) {
+                this.res.status(500).send(err);
+            }
+        });
         this.req = req;
         this.res = res;
         this.productsDB = Products_model_1.default;

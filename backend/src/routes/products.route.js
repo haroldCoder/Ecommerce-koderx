@@ -33,4 +33,9 @@ router.route("/products/:id")
     const { id } = req.params;
     new products_controllers_1.default(req, res).deleteProduct(parseInt(id));
 });
+router.route("/products/:search")
+    .get((req, res) => {
+    const { search } = req.params;
+    new products_controllers_1.default(req, res).searchProduct(search);
+});
 module.exports = router;

@@ -67,4 +67,27 @@ export default class ProductsControllers{
 
         this.res.json({"remove id": id})
     }
+
+    searchProduct = async(searchinp: string)=>{
+        try {
+            // user reggex expression for search words similar in the input name
+            const nameResults = await this.productsDB.find({ name: { $regex: searchinp, $options: 'i' } });
+    
+            //use reggex expression for search words similar in the input categoria
+            const categoryResults = await this.productsDB.find({ category: { $regex: searchinp, $options: 'i' } });
+    
+            // combine result category and name
+            const results = [...nameResults, ...categoryResults];
+    
+            // if exist the results, return them
+            if (results.length > 0) {
+                this.res.status(200).json(results);
+            } else {
+                // if not found, so not return
+                this.res.status(404);
+            }
+        } catch (err) {
+            this.res.status(500).send(err);
+        }
+    }
 }
