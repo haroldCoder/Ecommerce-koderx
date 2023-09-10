@@ -23,6 +23,7 @@ export default function Home({data, setData, change}: {data: Products[], setData
     
     getProducts();
   }, [change, data]);
+  
 
   return (
     <div>

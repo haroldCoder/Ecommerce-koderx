@@ -123,7 +123,7 @@ export default function Navbar({ setData, change }: { setData: React.Dispatch<Re
                     </div>
 
                     <div className='flex justify-between w-[25%]'>
-                        <Search />
+                        <Search setData={setData} change={change} />
                         <SignedIn>
                             <UserButton afterSignOutUrl={window.location.href} />
                         </SignedIn>
