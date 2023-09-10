@@ -45,7 +45,7 @@ export default function CarShop() {
         {
           reserve ?
           reserve.map((e) => (
-            <div className="flex justify-between mt-10 cursor-pointer hover:bg-slate-700 hover:scale-105 duration-150 p-3 items-center rounded-md bg-slate-800">
+            <div onClick={()=>location.href = `/cards/${e.id}`} className="flex justify-between mt-10 cursor-pointer hover:bg-slate-700 hover:scale-105 duration-150 p-3 items-center rounded-md bg-slate-800">
               <section className="cursor-pointer items-center  w-full flex gap-x-4 ">
                 <div className="p-2">
                   <img src={e.imgURI} className="h-[10vh] rounded-md" alt={e.name} />
