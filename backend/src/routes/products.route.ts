@@ -39,7 +39,7 @@ router.route("/products/:id")
     new ProductsControllers(req, res).deleteProduct(parseInt(id));
 })
 
-router.route("/products/:search")
+router.route("/products/search/:search")
 .get((req: Request, res: Response)=>{
     const {search} = req.params;
     new ProductsControllers(req, res).searchProduct(search);
