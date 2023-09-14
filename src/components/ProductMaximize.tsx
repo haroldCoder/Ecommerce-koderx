@@ -9,14 +9,17 @@ export default function ProductMaximize() {
     const {id} = useParams<{id: string}>()
     const {user} = useUser();
     const [isaddcar, setIsaddcar] = useState<boolean>(false)
+    const [image, setImage] = useState<string | undefined>("");
     
     useMemo(()=>{
         const getData = async() =>{
-            const res = (await axios.get(`${import.meta.env.VITE_API_URL}products/${id}?username=${import.meta.env.VITE_ACCESS}`)).data
+            const res : Products = (await axios.get(`${import.meta.env.VITE_API_URL}products/${id}?username=${import.meta.env.VITE_ACCESS}`)).data
             setData(res)
+            
         }
         
         getData();
+        
     },[])
 
     useEffect(()=>{
@@ -31,7 +34,8 @@ export default function ProductMaximize() {
             })
         }
         if(user){
-          isAddcar();  
+            isAddcar(); 
+            setImage(data?.imgURI)
         }
         
     },[user])
@@ -62,8 +66,15 @@ export default function ProductMaximize() {
 
   return (
     <div className="p-5 flex gap-x-28">
-        <section>
-            <img src={data?.imgURI} className="w-auto rounded-sm h-96" alt={data?.name} />
+        <section className="w-[30%]">
+            <img src={image} className="w-auto rounded-sm h-96" alt={data?.name} />
+            <div className="flex justify-between mt-10">
+                {
+                    data?.arrayImg.map((e)=>(
+                        <img src={e} alt={data._id} onClick={()=>setImage(e)} className="cursor-pointer hover:scale-105 w-auto h-28 rounded-sm" />
+                    ))
+                }
+            </div>
         </section>
         <section className="w-[50%] gap-10 flex-col flex">
             <h1 className="text-white text-center text-3xl">{data?.name}</h1>

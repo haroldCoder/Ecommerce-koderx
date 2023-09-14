@@ -5,7 +5,7 @@ export interface Products{
     imgURI: string,
     author: string,
     price: number,
-    arraImg: Array<string>,
+    arrayImg: Array<string>,
     category: string,
     buys: number,
     created_at: Date,
