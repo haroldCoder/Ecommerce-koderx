@@ -65,18 +65,23 @@ export default function ProductMaximize() {
     }
 
   return (
-    <div className="p-5 flex gap-x-28">
-        <section className="w-[30%]">
+    <div className="p-5 flex max-sm:flex-col gap-x-28">
+        <section className="w-[30%] max-sm:w-[100%]">
             <img src={image} className="w-auto rounded-sm h-96" alt={data?.name} />
-            <div className="flex justify-between mt-10">
-                {
-                    data?.arrayImg.map((e)=>(
-                        <img src={e} alt={data._id} onClick={()=>setImage(e)} className="cursor-pointer hover:scale-105 w-auto h-28 rounded-sm" />
-                    ))
-                }
-            </div>
+            {
+               data?.arrayImg.length! > 0 ? 
+               <div className="flex justify-between max-sm:flex-col max-sm:px-16 max-sm:mb-16 gap-y-5 mt-10">
+                    {
+                        data?.arrayImg.map((e)=>(
+                            <img src={e} alt={data._id} onClick={()=>setImage(e)} className="cursor-pointer hover:scale-105 w-auto h-28 rounded-sm" />
+                        ))
+                    }
+                </div>
+                : null
+            }
+            
         </section>
-        <section className="w-[50%] gap-10 flex-col flex">
+        <section className="w-[50%] max-sm:w-[100%] max-sm:mt-6 pb-16 gap-10 flex-col flex">
             <h1 className="text-white text-center text-3xl">{data?.name}</h1>
             <h2 className="text-blue-400 text-2xl">{data?.price} $</h2>
             <div>

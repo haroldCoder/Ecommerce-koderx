@@ -8,7 +8,7 @@ interface propsCard{
 
 export default function CardProducts ({id, name, description, imgURI, price} : propsCard) {
   return (
-    <div onClick={()=>location.href = `/cards/${id}`} className='bg-dark rounded-md w-[23%]  mb-5 cursor-pointer mx-3 bg-[#c5c5c559] backdrop-blur-lg'>
+    <div onClick={()=>location.href = `/cards/${id}`} className='bg-dark rounded-md w-[23%] max-sm:w-[100%]  mb-5 cursor-pointer mx-3 bg-[#c5c5c559] backdrop-blur-lg'>
         <section className='title flex justify-between px-4 py-2 bg-gray-500 rounded-t-md'>
             <h1 className='text-white text-base'>{name}</h1>
             <h2 className='text-gray-700'>{price}$</h2> 

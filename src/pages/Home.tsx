@@ -28,7 +28,7 @@ export default function Home({data, setData, change}: {data: Products[], setData
   return (
     <div>
       <Banner />
-      <section className='flex flex-wrap justify-between'>
+      <section className='flex flex-wrap max-sm:grid grid-cols-1 max-sm:p-8 justify-between'>
         {
           data.sort((a: Products, b: Products)=>{return b.created_at.getTime() - a.created_at.getTime()}).map((dt: Products)=>(
             <CardProducts id={dt._id!} name={dt.name} description={dt.description} imgURI={dt.imgURI} price={dt.price} />
