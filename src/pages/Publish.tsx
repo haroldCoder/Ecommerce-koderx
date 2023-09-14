@@ -70,7 +70,7 @@ export default function Publish() {
     imgURI: "",
     price: 0,
     author: user?.fullName || "",
-    arraImg: [],
+    arrayImg: [],
     category: "",
     buys: 0,
     created_at: new Date(),
@@ -102,7 +102,7 @@ export default function Publish() {
 
     setData((prev) => {
       prev.imgURI = urlimg.url
-      prev.arraImg = urlsimgs
+      prev.arrayImg = urlsimgs
       return prev
     })
 
