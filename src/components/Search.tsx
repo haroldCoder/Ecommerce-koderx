@@ -3,14 +3,14 @@ import { useState } from 'react'
 import {BsSearch} from 'react-icons/bs'
 import { Products } from '../types';
 
-export default function Search({ setData, change }: { setData: React.Dispatch<React.SetStateAction<Products[]>>, change: React.MutableRefObject<boolean> }) {
+export default function Search({ setData, change }: { setData: React.Dispatch<React.SetStateAction<Products[]>>, change: React.Dispatch<React.SetStateAction<boolean>> }) {
     const [search, setSearch] = useState<string>("");
 
-    const Search = (event: React.KeyboardEvent<HTMLDivElement>) =>{
+    const Search = async(event: React.KeyboardEvent<HTMLDivElement>) =>{
         if(event.key == "Enter"){
-            axios.get(`${import.meta.env.VITE_API_URL}products/search/${search}?username=${import.meta.env.VITE_ACCESS}`)
+           await axios.get(`${import.meta.env.VITE_API_URL}products/search/${search}?username=${import.meta.env.VITE_ACCESS}`)
             .then((res)=>{
-              change.current = true;
+              change(true)
               setData(() => {
                 return res.data.map((e: Products) => ({
                     ...e,

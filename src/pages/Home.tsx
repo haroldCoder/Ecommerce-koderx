@@ -4,12 +4,12 @@ import { Products } from '../types';
 import axios from 'axios';
 import CardProducts from '../components/CardProducts';
 
-export default function Home({data, setData, change}: {data: Products[], setData: Dispatch<SetStateAction<Products[]>>, change: React.MutableRefObject<boolean>}) {
+export default function Home({data, setData, change, setchange}: {data: Products[], setData: Dispatch<SetStateAction<Products[]>>, change: boolean, setchange: React.Dispatch<React.SetStateAction<boolean>>}) {
 
   useEffect(() => {
     const getProducts = async () => {
       const res: Products[] = (await axios.get(`${import.meta.env.VITE_API_URL}products?username=${import.meta.env.VITE_ACCESS}`)).data;
-      !change.current ?
+      !change ?
       setData(() => {
         const transformedData = res.map((e: Products) => ({
           ...e,
@@ -22,7 +22,7 @@ export default function Home({data, setData, change}: {data: Products[], setData
     }
     
     getProducts();
-  }, [change, data]);
+  }, [change]);
   
 
   return (

@@ -14,7 +14,7 @@ import { Products } from '../types';
 import axios from 'axios';
 import Search from './Search';
 
-export default function Navbar({ setData, change }: { setData: React.Dispatch<React.SetStateAction<Products[]>>, change: React.MutableRefObject<boolean> }) {
+export default function Navbar({ setData, change }: { setData: React.Dispatch<React.SetStateAction<Products[]>>, change: React.Dispatch<React.SetStateAction<boolean>> }) {
     const [anchorMe, setAnchorMe] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorMe);
     const [categories] = React.useState<Array<string>>(
@@ -54,7 +54,7 @@ export default function Navbar({ setData, change }: { setData: React.Dispatch<Re
     };
 
     const handleClose = async (evt: string) => {
-        change.current = true;
+        change(true);
         const data = await (await axios.get(`${import.meta.env.VITE_API_URL}products/?categorie=${evt}&username=${import.meta.env.VITE_ACCESS}`)).data
         setData(() => {
             return data.map((e: Products) => ({
@@ -79,7 +79,7 @@ export default function Navbar({ setData, change }: { setData: React.Dispatch<Re
                         >
                             <MenuIcon />
                         </IconButton>
-                        <Link to="/" onClick={() => change.current = false}>
+                        <Link to="/" onClick={() => change(false)}>
                             <Typography className='text-md hover:text-blue-300 cursor-pointer w-auto'>
                                 Home
                             </Typography>

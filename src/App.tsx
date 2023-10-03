@@ -15,17 +15,17 @@ const publicKey = import.meta.env.VITE_CLERK_KEY
 
 function App() {
   const [data, setData] = useState<Products[]>([]);
-  const change = useRef<boolean>(false);
-
+  const [change, setChange] = useState<boolean>(false);
+  
   return (
     <>
       <BrowserRouter>
         <ClerkProvider appearance={{
           baseTheme: dark
         }} publishableKey={publicKey} navigate={(to) => { const navaigate = useNavigate(); navaigate(to) }}>
-          <Navbar setData={setData} change={change} />
+          <Navbar setData={setData} change={setChange} />
           <Routes>
-            <Route path="/" element={<Home data={data} change={change} setData={setData} />} />
+            <Route path="/" element={<Home data={data} change={change} setchange={setChange} setData={setData} />} />
             <Route path="/publish" element={
               <>
                 <SignedIn>
