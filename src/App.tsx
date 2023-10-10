@@ -8,15 +8,16 @@ import { useNavigate } from 'react-router-dom'
 import { dark } from '@clerk/themes';
 import ProductMaximize from "./components/ProductMaximize";
 import CarShop from "./pages/CarShop";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Products } from "./types";
+import { ToastContainer } from "react-toastify";
 
 const publicKey = import.meta.env.VITE_CLERK_KEY
 
 function App() {
   const [data, setData] = useState<Products[]>([]);
   const [change, setChange] = useState<boolean>(false);
-  
+
   return (
     <>
       <BrowserRouter>
@@ -25,7 +26,7 @@ function App() {
         }} publishableKey={publicKey} navigate={(to) => { const navaigate = useNavigate(); navaigate(to) }}>
           <Navbar setData={setData} change={setChange} />
           <Routes>
-            <Route path="/" element={<Home data={data} change={change} setchange={setChange} setData={setData} />} />
+            <Route path="/" element={<Home data={data} change={change} setData={setData} />} />
             <Route path="/publish" element={
               <>
                 <SignedIn>
@@ -46,10 +47,24 @@ function App() {
                 </SignedOut>
               </>
             } />
-            <Route path="/cards/:id" element={<ProductMaximize/>} />
+            <Route path="/cards/:id" element={<ProductMaximize />} />
           </Routes>
         </ClerkProvider>
       </BrowserRouter>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      {/* Same as */}
+      <ToastContainer />
     </>
   )
 }

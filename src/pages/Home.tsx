@@ -4,7 +4,7 @@ import { Products } from '../types';
 import axios from 'axios';
 import CardProducts from '../components/CardProducts';
 
-export default function Home({data, setData, change, setchange}: {data: Products[], setData: Dispatch<SetStateAction<Products[]>>, change: boolean, setchange: React.Dispatch<React.SetStateAction<boolean>>}) {
+export default function Home({data, setData, change}: {data: Products[], setData: Dispatch<SetStateAction<Products[]>>, change: boolean}) {
 
   useEffect(() => {
     const getProducts = async () => {
