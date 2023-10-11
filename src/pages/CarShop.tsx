@@ -56,7 +56,7 @@ export default function CarShop() {
                 </div>
               </section>
               <section className="flex gap-x-8">
-                <button className="bg-green-600 hover:bg-green-700 p-2 rounded-md w-24 h-10 text-white" onClick={()=>payProduct(e.key_stripe, e.price, e.name)}>Pay now</button>
+                <button className="bg-green-600 hover:bg-green-700 p-2 rounded-md w-24 h-10 text-white" onClick={(evt)=>{evt.stopPropagation(); payProduct(e.key_stripe, e.price, e.name)}}>Pay now</button>
                 <button onClick={()=>RemovefromCarshop(e.id)} className="bg-red-600 hover:bg-red-800 p-2 rounded-md w-24 h-10 text-white">Cancel</button>
               </section>
             </div>
