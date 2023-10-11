@@ -3,6 +3,7 @@ import { Products } from "../types"
 import axios from "axios";
 import {useParams} from 'react-router-dom'
 import {useUser} from '@clerk/clerk-react'
+import {toast} from 'react-hot-toast'
 
 export default function ProductMaximize() {
     const [data, setData] = useState<Products>();
@@ -55,11 +56,12 @@ export default function ProductMaximize() {
     }
 
     const reserveProduct = (id: string | undefined) =>{
+        
         axios.post(`${import.meta.env.VITE_API_URL}carshop?username=${import.meta.env.VITE_ACCESS}`,{
             user: user?.fullName,
             newProduct: id
         })
-        .then((res)=>console.log(res)
+        .then((res)=>{console.log(res); toast.success("Product add to carshop"); setTimeout(()=>location.href = "/carshop", 2000);}
         )
         .catch((err)=>console.log(err))
     }

@@ -10,7 +10,7 @@ import ProductMaximize from "./components/ProductMaximize";
 import CarShop from "./pages/CarShop";
 import { useState } from "react";
 import { Products } from "./types";
-import { ToastContainer } from "react-toastify";
+import { Toaster } from "react-hot-toast";
 
 const publicKey = import.meta.env.VITE_CLERK_KEY
 
@@ -51,20 +51,10 @@ function App() {
           </Routes>
         </ClerkProvider>
       </BrowserRouter>
-      <ToastContainer
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
+      <Toaster
+            position="top-center"
+            reverseOrder={false}
       />
-      {/* Same as */}
-      <ToastContainer />
     </>
   )
 }

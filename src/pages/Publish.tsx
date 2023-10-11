@@ -5,6 +5,7 @@ import uploadToCloudinary from '../services/uploadCloudinary';
 import { Products } from '../types';
 import { useUser } from "@clerk/clerk-react";
 import axios from 'axios';
+import toast from 'react-hot-toast/headless';
 
 
 const SubImages: React.FC<{ image: string; setImg: Dispatch<SetStateAction<{ file: any[]; url: string[]; }>>, index: number }> = ({ image, setImg, index }) => {
@@ -93,6 +94,7 @@ export default function Publish() {
 
   const SendData = async (evt: ChangeEvent<HTMLFormElement>) => {
     evt.preventDefault();
+    
     const urlimg = await uploadToCloudinary(image.file)
     const urlsimgs: Array<string> = []
     arrayImgs.file.map(async (e, index: number) => {
@@ -107,7 +109,7 @@ export default function Publish() {
     })
 
     axios.post(`${import.meta.env.VITE_API_URL}products?username=${import.meta.env.VITE_ACCESS}`, data)
-      .then((res) => console.log(res))
+      .then((res) => {console.log(res); toast.success("Product Created");})
       .catch((err) => console.log(err))
   }
 
