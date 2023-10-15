@@ -36,7 +36,7 @@ router.route("/products/:id")
 .delete((req: Request, res: Response)=>{
     const {id} = req.params;
 
-    new ProductsControllers(req, res).deleteProduct(parseInt(id));
+    new ProductsControllers(req, res).deleteProduct(id);
 })
 
 router.route("/products/search/:search")

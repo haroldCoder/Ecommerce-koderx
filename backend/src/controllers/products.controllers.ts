@@ -62,7 +62,7 @@ export default class ProductsControllers{
         this.res.json({"update id": id});
     }
 
-    deleteProduct = async(id: number) => {
+    deleteProduct = async(id: string) => {
         await this.productsDB.findByIdAndDelete(id);
 
         this.res.json({"remove id": id})
