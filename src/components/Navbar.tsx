@@ -94,6 +94,11 @@ export default function Navbar({ setData, change }: { setData: React.Dispatch<Re
                                 Shopping cart
                             </Typography>
                         </Link>
+                        <Link to="created">
+                            <Typography className='text-md hover:text-blue-300 cursor-pointer w-auto'>
+                                Created
+                            </Typography>
+                        </Link>
                         <div>
                             <Button
                                 id="basic-button"

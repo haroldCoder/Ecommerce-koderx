@@ -11,6 +11,7 @@ import CarShop from "./pages/CarShop";
 import { useState } from "react";
 import { Products } from "./types";
 import { Toaster } from "react-hot-toast";
+import Created from "./pages/Created";
 
 const publicKey = import.meta.env.VITE_CLERK_KEY
 
@@ -48,7 +49,18 @@ function App() {
               </>
             } />
             <Route path="/cards/:id" element={<ProductMaximize />} />
+            <Route path="/created" element={
+              <>
+              <SignedIn>
+                <Created />
+              </SignedIn>
+              <SignedOut>
+                <RedirectToSignIn />
+              </SignedOut>
+            </>
+            } />
           </Routes>
+          
         </ClerkProvider>
       </BrowserRouter>
       <Toaster
