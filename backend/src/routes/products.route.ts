@@ -45,7 +45,7 @@ router.route("/products/search/:search")
     new ProductsControllers(req, res).searchProduct(search);
 })
 
-router.route("/products/:author")
+router.route("/products/author/:author")
 .get((req: Request, res: Response)=>{
     const {author} = req.params;
     new ProductsControllers(req, res).getProductsByAuthor(author);
