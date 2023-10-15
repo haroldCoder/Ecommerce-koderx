@@ -109,7 +109,18 @@ export default function Publish() {
     })
 
     axios.post(`${import.meta.env.VITE_API_URL}products?username=${import.meta.env.VITE_ACCESS}`, data)
-      .then((res) => {console.log(res); toast.success("Product Created");})
+      .then((res) => {console.log(res); toast.success("Product Created"); setData({
+        name: "",
+        description: "",
+        imgURI: "",
+        price: 0,
+        author: user?.fullName || "",
+        arrayImg: [],
+        category: "",
+        buys: 0,
+        created_at: new Date(),
+        key_stripe: ""
+      });})
       .catch((err) => console.log(err))
   }
 
@@ -185,7 +196,7 @@ export default function Publish() {
               return prev
             })
           }} required type="text" placeholder='key of Stripe' className='decoration-none outline-none border-b-2 bg-transparent p-2 text-white mb-5 border-blue-600 w-full' />
-          <p className='text-white ml-3 mb-3'>you not have key stripe <a className='text-blue-500 hover:text-blue-600' href="https://dashboard.stripe.com/apikeys">https://dashboard.stripe.com/apikeys</a></p>
+          <p className='text-white ml-3 mb-3'>you not have key stripe <a className='text-blue-500 hover:text-blue-600' target='blank' href="https://dashboard.stripe.com/apikeys">https://dashboard.stripe.com/apikeys</a></p>
         </div>
         <button type='submit' className='px-4 py-2 bg-blue-500 rounded-md text-white w-full hover:bg-blue-700 hover:scale-105'>Create Product</button>
       </section>

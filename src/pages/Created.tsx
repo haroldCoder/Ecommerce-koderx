@@ -4,6 +4,7 @@ import { Products } from "../types";
 import axios from "axios";
 import {MdDelete} from "react-icons/md";
 import toast from "react-hot-toast";
+import notfound from "../assets/404.webp"
 
 export default function Created() {
     const {user} = useUser();
@@ -51,7 +52,10 @@ export default function Created() {
                     </div> 
                 ))
                 : 
-                <h2 className="text-4xl text-white">Not Found</h2>   
+                <div className="flex justify-center flex-wrap flex-col w-[100%] items-center">
+                    <img src={notfound} alt="404" />
+                    <h2 className="text-2xl text-gray-400">you haven't created products yet</h2>    
+                </div>
             }
         </section>
     </div>
