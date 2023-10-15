@@ -83,6 +83,14 @@ class ProductsControllers {
                 this.res.status(500).send(err);
             }
         });
+        this.getProductsByAuthor = (author) => __awaiter(this, void 0, void 0, function* () {
+            try {
+                this.res.status(200).json(yield this.productsDB.find({ author: author }));
+            }
+            catch (err) {
+                this.res.status(500).send(err);
+            }
+        });
         this.req = req;
         this.res = res;
         this.productsDB = Products_model_1.default;

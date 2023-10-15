@@ -38,4 +38,9 @@ router.route("/products/search/:search")
     const { search } = req.params;
     new products_controllers_1.default(req, res).searchProduct(search);
 });
+router.route("/products/:author")
+    .get((req, res) => {
+    const { author } = req.params;
+    new products_controllers_1.default(req, res).getProductsByAuthor(author);
+});
 module.exports = router;

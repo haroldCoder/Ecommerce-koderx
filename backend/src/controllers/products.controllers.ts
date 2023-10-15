@@ -90,4 +90,13 @@ export default class ProductsControllers{
             this.res.status(500).send(err);
         }
     }
+
+    getProductsByAuthor = async(author: string) =>{
+        try{
+            this.res.status(200).json(await this.productsDB.find({author: author}))
+        }
+        catch (err) {
+            this.res.status(500).send(err);
+        }
+    }
 }
