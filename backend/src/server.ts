@@ -16,7 +16,17 @@ const authMiddleware = new AuthMiddleware(process.env.SECRET_KEY as string);
 app.use("/api", authMiddleware.authenticate.bind(authMiddleware), require("./routes/products.route"))
 app.use("/api", authMiddleware.authenticate.bind(authMiddleware), require("./routes/carshop.route"))
 
-app.listen(PORT, ()=>{
-    console.log(`Server on port ${PORT}`);
-    new ConnectionDB();
-})
+async function startServer() {
+    try {
+      const dbConnection = new ConnectionDB();
+      await dbConnection.connection;
+  
+      app.listen(PORT, () => {
+        console.log(`Server is running on port ${PORT}`);
+      });
+    } catch (error) {
+      console.error('Error starting the server:', error);
+    }
+  }
+  
+  startServer();
