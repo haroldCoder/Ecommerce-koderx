@@ -4,6 +4,7 @@ import axios from "axios";
 import {useParams} from 'react-router-dom'
 import {toast} from 'react-hot-toast'
 import {useUser} from '@clerk/clerk-react'
+import { RedirectToSignIn, SignedIn, SignedOut } from '@clerk/clerk-react'
 
 export default function ProductMaximize() {
     const [data, setData] = useState<Products>();
@@ -98,7 +99,12 @@ export default function ProductMaximize() {
                                 <button onClick={()=>reserveProduct(data?._id)} className="bg-blue-600 rounded-md hover:scale-105 text-gray-400 px-4 py-2 w-[45%]">add car</button>
                                 : <button onClick={payProduct} className="rounded-md text-white bg-green-600 cursor-default px-4 py-2 w-[45%]">This product ready add car</button>
                         }
-                        <button onClick={payProduct} className="rounded-md text-white hover:bg-white hover:text-black px-4 py-2 w-[45%]">pay now</button> 
+                        <SignedIn>
+                            <button onClick={payProduct} className="rounded-md text-white hover:bg-white hover:text-black px-4 py-2 w-[45%]">pay now</button> 
+                        </SignedIn>
+                        <SignedOut>
+                            <RedirectToSignIn/>
+                        </SignedOut>
                     </div>
                 : null
             }
