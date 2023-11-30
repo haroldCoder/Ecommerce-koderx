@@ -16,9 +16,11 @@ export default function CarShop() {
             .then((res)=>setReserve(res.data))
         };
         getData();
+        
+        
       }, []);
 
-      const payProduct = async(key_stripe: string, price: number, name: string) =>{
+      const payProduct = async(key_stripe: string, price: number, name: string, email: string) =>{
         await axios.post(`https://stripe-node-microservice.vercel.app/api/stripe`,{
             api_key_stripe: key_stripe,
             mode: "payment",
@@ -26,7 +28,7 @@ export default function CarShop() {
             quantity: 1,
             currency: 'usd',
             name: name,
-            success_url: location.href,
+            success_url: `https://info-compiler.netlify.app/?email=${email}`,
             cancel_url: location.href
         }).then((res)=>location.href = res.data)
         .catch((err)=>console.log(err))
@@ -45,7 +47,7 @@ export default function CarShop() {
         {
           reserve ?
           reserve.map((e) => (
-            <div onClick={()=>location.href = `/cards/${e.id}`} className="flex justify-between mt-10 cursor-pointer hover:bg-slate-700 hover:scale-105 duration-150 p-3 items-center rounded-md bg-slate-800">
+            <div key={e.id} onClick={()=>location.href = `/cards/${e.id}`} className="flex justify-between mt-10 cursor-pointer hover:bg-slate-700 hover:scale-105 duration-150 p-3 items-center rounded-md bg-slate-800">
               <section className="cursor-pointer items-center  w-full flex gap-x-4 ">
                 <div className="p-2">
                   <img src={e.imgURI} className="h-[10vh] rounded-md" alt={e.name} />
@@ -56,7 +58,7 @@ export default function CarShop() {
                 </div>
               </section>
               <section className="flex gap-x-8">
-                <button className="bg-green-600 hover:bg-green-700 p-2 rounded-md w-24 h-10 text-white" onClick={(evt)=>{evt.stopPropagation(); payProduct(e.key_stripe, e.price, e.name)}}>Pay now</button>
+                <button className="bg-green-600 hover:bg-green-700 p-2 rounded-md w-24 h-10 text-white" onClick={(evt)=>{evt.stopPropagation(); payProduct(e.key_stripe, e.price, e.name, e.email)}}>Pay now</button>
                 <button onClick={()=>RemovefromCarshop(e.id)} className="bg-red-600 hover:bg-red-800 p-2 rounded-md w-24 h-10 text-white">Cancel</button>
               </section>
             </div>

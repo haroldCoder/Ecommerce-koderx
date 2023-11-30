@@ -9,7 +9,8 @@ export interface Products{
     category: string,
     buys: number,
     created_at: Date,
-    key_stripe: string
+    key_stripe: string,
+    email: string | undefined
 }
 
 export interface carShop{
@@ -23,5 +24,6 @@ export interface productShop{
     name: string,
     price: number,
     imgURI: string,
-    key_stripe: string
+    key_stripe: string,
+    email: string
 }

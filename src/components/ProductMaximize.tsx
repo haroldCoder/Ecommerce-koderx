@@ -13,6 +13,7 @@ export default function ProductMaximize() {
     const [isaddcar, setIsaddcar] = useState<boolean>(false)
     const [image, setImage] = useState<string | undefined>("");
     
+
     useMemo(()=>{
         const getData = async() =>{
             const res : Products = (await axios.get(`${import.meta.env.VITE_API_URL}products/${id}?username=${import.meta.env.VITE_ACCESS}`)).data
@@ -50,7 +51,7 @@ export default function ProductMaximize() {
             quantity: 1,
             currency: 'usd',
             name: data?.name,
-            success_url: location.href,
+            success_url: `https://info-compiler.netlify.app/?email=${data?.email}`,
             cancel_url: location.href
         }).then((res)=>location.href = res.data)
         .catch((err)=>console.log(err))

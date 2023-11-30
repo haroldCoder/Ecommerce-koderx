@@ -75,7 +75,8 @@ export default function Publish() {
     category: "",
     buys: 0,
     created_at: new Date(),
-    key_stripe: ""
+    key_stripe: "",
+    email: ""
   })
 
   const handleFileUpload = async (event: any) => {
@@ -119,7 +120,8 @@ export default function Publish() {
         category: "",
         buys: 0,
         created_at: new Date(),
-        key_stripe: ""
+        key_stripe: "",
+        email: user?.emailAddresses[0].emailAddress
       });})
       .catch((err) => console.log(err))
   }
