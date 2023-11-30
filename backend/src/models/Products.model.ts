@@ -11,7 +11,8 @@ const product = new Schema({
     arrayImg: {type: [String], require: false},
     buys: {type: Number, require: true},
     created_at: {type: Date, default: Date.now()},
-    key_stripe: {type: String, require: true, unique: false}
+    key_stripe: {type: String, require: true, unique: false},
+    email: {type: String, require: true, unique: false}
 })
 
 export default mongoose.model("Products", product);

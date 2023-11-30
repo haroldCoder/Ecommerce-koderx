@@ -65,7 +65,8 @@ export default class Carshop extends CarShopModel {
                 name: product?.name,
                 price: product?.price,
                 imgURI: product?.imgURI,
-                key_stripe: product?.key_stripe
+                key_stripe: product?.key_stripe,
+                email: product?.email
             };
         }));
 

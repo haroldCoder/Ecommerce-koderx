@@ -59,7 +59,8 @@ class Carshop extends CarShop_model_1.default {
                     name: product === null || product === void 0 ? void 0 : product.name,
                     price: product === null || product === void 0 ? void 0 : product.price,
                     imgURI: product === null || product === void 0 ? void 0 : product.imgURI,
-                    key_stripe: product === null || product === void 0 ? void 0 : product.key_stripe
+                    key_stripe: product === null || product === void 0 ? void 0 : product.key_stripe,
+                    email: product === null || product === void 0 ? void 0 : product.email
                 };
             })));
             // Luego, envía la respuesta después de que todas las Promesas se hayan resuelto
