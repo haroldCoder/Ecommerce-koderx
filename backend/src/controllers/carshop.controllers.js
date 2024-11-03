@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Products_model_1 = __importDefault(require("../models/Products.model"));
 const CarShop_model_1 = __importDefault(require("../models/CarShop.model"));
 const products_controllers_1 = __importDefault(require("./products.controllers"));
-const mongoose_1 = __importDefault(require("mongoose"));
 class Carshop extends CarShop_model_1.default {
     constructor(req, res) {
         super();
@@ -86,7 +85,7 @@ class Carshop extends CarShop_model_1.default {
             });
         });
         this.EmptyProduct = (id, user) => {
-            this.carshop.findOne({ user: user, products: new mongoose_1.default.Types.ObjectId(id) })
+            this.carshop.findOne({ user: user, "products.id": id })
                 .then((res) => {
                 if (res) {
                     this.res.status(200).send("product exist in carshop");

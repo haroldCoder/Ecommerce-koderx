@@ -24,7 +24,7 @@ export default function Banner() {
     }
 
     getData();
-  })
+  }, [])
 
   useEffect(() => {
     const timer = setInterval(() => {

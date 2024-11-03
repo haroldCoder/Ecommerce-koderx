@@ -99,7 +99,7 @@ export default class Carshop extends CarShopModel {
     }
 
     EmptyProduct = (id: string, user: string) =>{
-        this.carshop.findOne({user: user, products: new mongoose.Types.ObjectId(id)})
+        this.carshop.findOne({user: user, "products.id": id})
         .then((res)=>{
             if(res){
               this.res.status(200).send("product exist in carshop")  
